@@ -42,6 +42,18 @@ class InventoryPage extends Page {
         return $('.shopping_cart_badge');
     }
 
+    public get sortDropdown () {
+        return $('.product_sort_container');
+    }
+
+    public get productPrices () {
+        return $$('.inventory_item_price');
+    }
+
+    public get productNames () {
+        return $$('.inventory_item_name');
+    }
+
     public async isOnInventoryPage () {
         return await this.inventoryContainer.isDisplayed();
     }
@@ -107,6 +119,29 @@ class InventoryPage extends Page {
 
     public async openCart () {
         await this.shoppingCart.click();
+    }
+
+    public async selectSortOption(option: 'az' | 'za' | 'lohi' | 'hilo') {
+        await this.sortDropdown.selectByAttribute('value', option);
+    }
+
+    public async getProductPrices(): Promise<number[]> {
+        const priceElements = await this.productPrices;
+        const prices = [];
+        for (const el of priceElements) {
+            const text = await el.getText();
+            prices.push(Number(text.replace('$', '')));
+        }
+        return prices;
+    }
+
+    public async getProductNames(): Promise<string[]> {
+        const nameElements = await this.productNames;
+        const names = [];
+        for (const el of nameElements) {
+            names.push(await el.getText());
+        }
+        return names;
     }
 
     public async logout () {
