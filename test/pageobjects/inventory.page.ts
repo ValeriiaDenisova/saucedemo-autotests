@@ -54,6 +54,22 @@ class InventoryPage extends Page {
         return $$('.inventory_item_name');
     }
 
+    public get twitterLink () {
+        return $('.social_twitter a');
+    }
+
+    public get facebookLink () {
+        return $('.social_facebook a');
+    }
+
+    public get linkedinLink () {
+        return $('.social_linkedin a');
+    }
+
+    public get footer () {
+        return $('.footer');
+    }
+
     public async isOnInventoryPage () {
         return await this.inventoryContainer.isDisplayed();
     }
@@ -142,6 +158,37 @@ class InventoryPage extends Page {
             names.push(await el.getText());
         }
         return names;
+    }
+
+    public async clickTwitterLink () {
+        await this.twitterLink.click();
+    }
+
+    public async clickFacebookLink () {
+        await this.facebookLink.click();
+    }
+
+    public async clickLinkedinLink () {
+        await this.linkedinLink.click();
+    }
+
+    public async isFooterDisplayed () {
+        return await this.footer.isDisplayed();
+    }
+
+    public async getCurrentUrl () {
+        return await browser.getUrl();
+    }
+
+    public async switchToNewTab () {
+        const handles = await browser.getWindowHandles();
+        await browser.switchToWindow(handles[handles.length - 1]);
+    }
+
+    public async closeCurrentTab () {
+        await browser.closeWindow();
+        const handles = await browser.getWindowHandles();
+        await browser.switchToWindow(handles[0]);
     }
 
     public async logout () {
