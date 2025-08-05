@@ -34,6 +34,14 @@ class InventoryPage extends Page {
         return $('.bm-menu');
     }
 
+    public get addToCartButtons () {
+        return $$('.btn_inventory');
+    }
+
+    public get cartBadgeCount () {
+        return $('.shopping_cart_badge');
+    }
+
     public async isOnInventoryPage () {
         return await this.inventoryContainer.isDisplayed();
     }
@@ -49,7 +57,8 @@ class InventoryPage extends Page {
 
     public async areProductsDisplayed () {
         const products = await this.products;
-        return products.length > 0;
+        const count = await products.length;
+        return count > 0;
     }
 
     public async verifyInventoryPageLoaded () {
@@ -77,6 +86,27 @@ class InventoryPage extends Page {
 
     public async isMenuExpanded () {
         return await this.menuContainer.isDisplayed();
+    }
+
+    public async addFirstProductToCart () {
+        const addToCartButtons = await this.addToCartButtons;
+        const count = await addToCartButtons.length;
+    
+        if (count > 0) {
+            await addToCartButtons[0].click();
+        }
+    }
+
+    public async getCartBadgeCount () {
+        const badge = await this.cartBadgeCount;
+        if (await badge.isDisplayed()) {
+            return await badge.getText();
+        }
+        return '0';
+    }
+
+    public async openCart () {
+        await this.shoppingCart.click();
     }
 
     public async logout () {
