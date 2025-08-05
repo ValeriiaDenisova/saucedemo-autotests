@@ -26,6 +26,14 @@ class InventoryPage extends Page {
         return $('#logout_sidebar_link');
     }
 
+    public get menuItems () {
+        return $$('.bm-item-list a');
+    }
+
+    public get menuContainer () {
+        return $('.bm-menu');
+    }
+
     public async isOnInventoryPage () {
         return await this.inventoryContainer.isDisplayed();
     }
@@ -56,8 +64,23 @@ class InventoryPage extends Page {
         };
     }
 
-    public async logout () {
+    public async openBurgerMenu () {
+        await this.burgerMenu.waitForDisplayed();
         await this.burgerMenu.click();
+        await this.menuContainer.waitForDisplayed();
+    }
+
+    public async getMenuItemsCount () {
+        const menuItems = await this.menuItems;
+        return menuItems.length;
+    }
+
+    public async shouldSeeExpandedMenu () {
+        const menuExpanded =  await this.menuContainer.isDisplayed();
+        expect(menuExpanded).toBe(true)
+    }
+
+    public async logout () {
         await this.logoutLink.click();
     }
 }
