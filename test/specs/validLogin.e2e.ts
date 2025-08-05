@@ -1,7 +1,7 @@
 import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page'
 import InventoryPage from '../pageobjects/inventory.page'
-import { testData } from '../config/testData'
+import { testUsers } from '../config/testUsers'
 import { baseTestSetup } from './baseTest/baseTestSetup'
 
 beforeEach(async () => {
@@ -11,7 +11,7 @@ beforeEach(async () => {
 describe('Sauce Demo - Login Tests', () => {
     describe('Test Case #1: Valid Login', () => {
         it('should login with valid credentials and redirect to inventory page', async () => {
-            await LoginPage.login(testData.validUser.username, testData.validUser.password)
+            await LoginPage.login(testUsers.validUser.username, testUsers.validUser.password)
 
             const inventoryStatus = await InventoryPage.verifyInventoryPageLoaded()
             

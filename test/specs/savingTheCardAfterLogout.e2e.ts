@@ -2,7 +2,7 @@ import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page'
 import InventoryPage from '../pageobjects/inventory.page'
 import CartPage from '../pageobjects/cart.page'
-import { testData } from '../config/testData'
+import { testUsers } from '../config/testUsers'
 import { baseTestSetup } from './baseTest/baseTestSetup'
 
 beforeEach(async () => {
@@ -12,7 +12,7 @@ beforeEach(async () => {
 describe('Sauce Demo - Cart Tests', () => {
     describe('Test Case #5: Saving the card after logout', () => {
         it('should save cart items after logout and login', async () => {
-            await LoginPage.login(testData.validUser.username, testData.validUser.password)
+            await LoginPage.login(testUsers.validUser.username, testUsers.validUser.password)
 
             const inventoryStatus = await InventoryPage.verifyInventoryPageLoaded()
             expect(inventoryStatus.inventoryLoaded).toBe(true)
@@ -40,7 +40,7 @@ describe('Sauce Demo - Cart Tests', () => {
             expect(usernameValue).toBe('')
             expect(passwordValue).toBe('')
 
-            await LoginPage.login(testData.validUser.username, testData.validUser.password)
+            await LoginPage.login(testUsers.validUser.username, testUsers.validUser.password)
 
             const inventoryStatusAfterLogin = await InventoryPage.verifyInventoryPageLoaded()
             expect(inventoryStatusAfterLogin.inventoryLoaded).toBe(true)

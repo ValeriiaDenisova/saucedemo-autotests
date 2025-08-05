@@ -1,13 +1,13 @@
 import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page'
 import InventoryPage from '../pageobjects/inventory.page'
-import { testData } from '../config/testData'
+import { testUsers } from '../config/testUsers'
 import { baseTestSetup } from './baseTest/baseTestSetup'
 
 describe('Sauce Demo - Product Sorting', () => {
     beforeEach(async () => {
         await baseTestSetup()
-        await LoginPage.login(testData.validUser.username, testData.validUser.password)
+        await LoginPage.login(testUsers.validUser.username, testUsers.validUser.password)
         await InventoryPage.verifyInventoryPageLoaded()
     });
 

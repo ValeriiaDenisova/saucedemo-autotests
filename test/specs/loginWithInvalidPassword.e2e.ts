@@ -1,6 +1,6 @@
 import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page'
-import { testData } from '../config/testData'
+import { testUsers } from '../config/testUsers'
 import { baseTestSetup } from './baseTest/baseTestSetup'
 
 beforeEach(async () => {
@@ -10,7 +10,7 @@ beforeEach(async () => {
 describe('Sauce Demo - Login Tests', () => {
     describe('Test Case #2: Login with invalid password', () => {
         it('should display error when login with invalid password', async () => {
-            await LoginPage.login(testData.invalidPassword.username, testData.invalidPassword.password)
+            await LoginPage.login(testUsers.invalidPassword.username, testUsers.invalidPassword.password)
 
             const errorDisplayed = await LoginPage.isErrorDisplayed()
             expect(errorDisplayed).toBe(true)
