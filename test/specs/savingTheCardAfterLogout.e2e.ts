@@ -3,11 +3,15 @@ import LoginPage from '../pageobjects/login.page'
 import InventoryPage from '../pageobjects/inventory.page'
 import CartPage from '../pageobjects/cart.page'
 import { testData } from '../config/testData'
+import { baseTestSetup } from './baseTest/baseTestSetup'
+
+beforeEach(async () => {
+    await baseTestSetup()
+})
 
 describe('Sauce Demo - Cart Tests', () => {
     describe('Test Case #5: Saving the card after logout', () => {
         it('should save cart items after logout and login', async () => {
-            await LoginPage.open()
             await LoginPage.login(testData.validUser.username, testData.validUser.password)
 
             const inventoryStatus = await InventoryPage.verifyInventoryPageLoaded()
