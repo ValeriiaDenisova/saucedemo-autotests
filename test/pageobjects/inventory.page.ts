@@ -75,9 +75,8 @@ class InventoryPage extends Page {
         return menuItems.length;
     }
 
-    public async shouldSeeExpandedMenu () {
-        const menuExpanded =  await this.menuContainer.isDisplayed();
-        expect(menuExpanded).toBe(true)
+    public async isMenuExpanded () {
+        return await this.menuContainer.isDisplayed();
     }
 
     public async logout () {
