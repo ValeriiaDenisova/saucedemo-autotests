@@ -26,6 +26,18 @@ class CartPage extends Page {
         return $$('.btn_secondary');
     }
 
+    public get emptyCartMessage () {
+        return $('.removed_cart_item');
+    }
+
+    public get errorMessage () {
+        return $('[data-test="error"]');
+    }
+
+    public get cartQuantity () {
+        return $('.cart_quantity');
+    }
+
     public async isOnCartPage () {
         return await this.cartContainer.isDisplayed();
     }
@@ -47,6 +59,37 @@ class CartPage extends Page {
         return {
             cartLoaded: await this.isOnCartPage(),
             title: title,
+            itemsCount: itemsCount
+        };
+    }
+
+    public async isCartEmpty () {
+        const itemsCount = await this.getCartItemsCount();
+        return itemsCount === 0;
+    }
+
+    public async getEmptyCartMessage () {
+        const emptyMessage = await this.emptyCartMessage;
+        if (await emptyMessage.isDisplayed()) {
+            return await emptyMessage.getText();
+        }
+        return '';
+    }
+
+    public async getErrorMessage () {
+        const errorElement = await this.errorMessage;
+        if (await errorElement.isDisplayed()) {
+            return await errorElement.getText();
+        }
+        return '';
+    }
+
+    public async verifyEmptyCart () {
+        const itemsCount = await this.getCartItemsCount();
+        const isEmpty = itemsCount === 0;
+        
+        return {
+            isEmpty: isEmpty,
             itemsCount: itemsCount
         };
     }

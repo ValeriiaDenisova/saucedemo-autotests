@@ -30,6 +30,14 @@ class CheckoutPage extends Page {
         return $('[data-test="error"]');
     }
 
+    public async getErrorMessage () {
+        const errorElement = await this.errorMessage;
+        if (await errorElement.isDisplayed()) {
+            return await errorElement.getText();
+        }
+        return '';
+    }
+
     public get overviewContainer () {
         return $('.cart_list');
     }
