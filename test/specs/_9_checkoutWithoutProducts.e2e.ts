@@ -9,7 +9,7 @@ beforeEach(async () => {
     await baseTestSetup()
 })
 
-describe('Sauce Demo - Checkout Tests', () => {
+describe('Test Case Objective: Checkout', () => {
     describe('Test Case #9: Checkout without products', () => {
         it('should display error when trying to checkout with empty cart', async () => {
             await LoginPage.login(testUsers.validUser.username, testUsers.validUser.password)

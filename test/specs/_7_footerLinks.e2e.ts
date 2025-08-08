@@ -2,15 +2,16 @@ import { expect } from '@wdio/globals'
 import LoginPage from '../pageobjects/login.page'
 import InventoryPage from '../pageobjects/inventory.page'
 import { testUsers } from '../config/testUsers'
-import { baseTestSetup } from './baseTest/baseTestSetup'
+import { baseTestSetup, stepper } from './baseTest/baseTestSetup'
 
 beforeEach(async () => {
     await baseTestSetup()
 })
 
-describe('Sauce Demo - Footer Links Tests', () => {
+describe('Test Case Objective: Footer', () => {
     describe('Test Case #7: Footer Links', () => {
         it('should open social media links in new tabs', async () => {
+
             await LoginPage.login(testUsers.validUser.username, testUsers.validUser.password)
 
             const inventoryStatus = await InventoryPage.verifyInventoryPageLoaded()
@@ -21,18 +22,21 @@ describe('Sauce Demo - Footer Links Tests', () => {
 
             const initialHandles = await browser.getWindowHandles()
 
+            stepper.step('1. Click on the "Twitter" link')
             await InventoryPage.clickTwitterLink()
             await InventoryPage.switchToNewTab()
             const twitterUrl = await InventoryPage.getCurrentUrl()
             expect(twitterUrl).toContain('x.com/saucelabs')
             await InventoryPage.closeCurrentTab()
 
+            stepper.step('2. Click on the "Facebook" link')
             await InventoryPage.clickFacebookLink()
             await InventoryPage.switchToNewTab()
             const facebookUrl = await InventoryPage.getCurrentUrl()
             expect(facebookUrl).toContain('facebook.com')
             await InventoryPage.closeCurrentTab()
 
+            stepper.step('3. Click on the "LinkedIn" link')
             await InventoryPage.clickLinkedinLink()
             await InventoryPage.switchToNewTab()
             const linkedinUrl = await InventoryPage.getCurrentUrl()
