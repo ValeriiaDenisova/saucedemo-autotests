@@ -93,6 +93,14 @@ class CartPage extends Page {
             itemsCount: itemsCount
         };
     }
+
+    public async clickCheckout () {
+        await this.checkoutButton.click();
+    }
+
+    public async getCurrentUrl () {
+        return await browser.getUrl();
+    }
 }
 
 export default new CartPage(); 

@@ -191,6 +191,14 @@ class InventoryPage extends Page {
         await browser.switchToWindow(handles[0]);
     }
 
+    public async getInitialWindowHandles () {
+        return await browser.getWindowHandles();
+    }
+
+    public async getFinalWindowHandles () {
+        return await browser.getWindowHandles();
+    }
+
     public async logout () {
         await this.logoutLink.click();
     }
